@@ -1,0 +1,29 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+
+{% if post_usuario %}
+    {% for post in post_usuario %}
+        <div class="container card mb-3 mt-2">
+            <div class="card-header bg-white">
+                <a href="{% url "ver-perfil" post.author.username %}" class="text-decoration-none">{{ post.author }}</a> criado em {{ post.data_posted|date:"N l, Y P" }}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                {% if user.is_authenticated and request.user.id == post.author.id %}
+                    <a href="{% url "atualizar-post" post.pk %}" class="btn btn-sm btn-primary">Atualizar</a>
+                    <a href="{% url "deletar-post" post.id %}" class="btn btn-sm btn-danger">Deletar</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <div class="container text-center mt-5">
+        <div class="alert alert-info" role="alert">
+            Você ainda não tem nenhum post.
+        </div>
+    </div>
+{% endif %}
+
+{% endblock  %}

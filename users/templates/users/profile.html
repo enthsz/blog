@@ -1,0 +1,37 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-body">
+            {% if request.user.profile.image %}
+                <img src="{{ request.user.profile.image.url }}" class="card-img-top rounded-circle mx-auto d-block" style="width:300px;height:300px;">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group mt-3">
+                        {{ user_form|crispy }}
+                        {{ photo_form|crispy }}
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 mb-3">
+                            <button type="submit" class="btn btn-dark btn-block">Salvar Alterações</button>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <button type="submit" name="delete_image" class="btn btn-danger btn-block">Excluir Imagem</button>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <a href="{% url 'ver-posts' %}" class="btn btn-dark btn-block">Ver Posts</a>
+                        </div>
+                    </div>
+                </form>
+            {% else %}
+                <img src="{% static 'fotos/padrao.jpg' %}" class="card-img-top rounded-circle mx-auto d-block" style="width:300px;height:300px;">
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

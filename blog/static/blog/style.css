@@ -1,0 +1,22 @@
+body{
+   background-color: gainsboro; 
+}
+
+.profile-card {
+   max-width: 400px;
+   margin: auto;
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+   border-radius: 10px;
+   overflow: hidden;
+}
+
+.profile-card img {
+   width: 100%;
+   height: auto;
+   border-radius: 50%; /* Adicionando borda arredondada */
+}
+
+.profile-card-body {
+   padding: 20px;
+}
+

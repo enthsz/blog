@@ -1,0 +1,17 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="profile-card bg-white">
+            <img src="{{usuario.profile.image.url}}" alt="{{usuario.username}}" class="card-img-top rounded-circle mx-auto d-block" style="width:300px;height:300px;">
+            <div class="profile-card-body text-center">
+                <h1 class="display-4">{{usuario.username}}</h1>
+                <h2 class="text-muted">Email: {{usuario.email}}</h2>
+            </div>
+        </div>
+    </div>
+    
+{% endblock  %}

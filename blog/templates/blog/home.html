@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+{% if posts %}
+<div class="container mt-3">
+    {% for post in posts %}
+        <div class="card mb-3">
+            <div class="card-header bg-white d-flex align-items-center">
+                <img src="{{ post.author.profile.image.url }}" alt="{{ post.author.username }}'s profile picture" class="rounded-circle mr-3" style="width:40px; height:40px; object-fit:cover;">
+                <div>
+                    <a href="{% url "ver-perfil" post.author.username %}" class="text-decoration-none">{{ post.author }}</a>
+                    <span class="text-muted">•</span>
+                    <span class="text-muted">{{ post.data_posted|date:"N l, Y P" }}</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ post.title }}</h5>
+                <p class="card-text">{{ post.content }}</p>
+                {% if user.is_authenticated and request.user.id == post.author.id %}
+                    <a href="{% url "atualizar-post" post.pk %}" class="btn btn-sm btn-primary">Atualizar</a>
+                    <a href="{% url "deletar-post" post.id %}" class="btn btn-sm btn-danger">Deletar</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="container mt-3">
+    <h1>Não existem posts.</h1>
+</div>
+{% endif %}
+
+{% endblock %}
